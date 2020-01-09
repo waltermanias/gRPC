@@ -1,0 +1,22 @@
+{
+  "name": "grpc",
+  "version": "1.0.0",
+  "description": "protoc -I=. ./protos/dummy.proto --js_out=import_style=commonjs,binary:./server --grpc_out=./server --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waltermanias/gRPC.git"
+  },
+  "author": "waltermanias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waltermanias/gRPC/issues"
+  },
+  "homepage": "https://github.com/waltermanias/gRPC#readme",
+  "dependencies": {
+    "google-protobuf": "^3.11.2"
+  }
+}
