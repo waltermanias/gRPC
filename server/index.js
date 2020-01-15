@@ -29,10 +29,32 @@ function sum(call, callback) {
   callback(null, sumResponse);
 }
 
+function primeNumberDecomposition(call, callback) {
+  let number = call.request.getNumber();
+  let divisor = 2;
+  while (number > 1) {
+    if (number % divisor === 0) {
+      let primeNumberDecompositionResponse = new SumAPI.PrimeNumberDecompositionResponse();
+      primeNumberDecompositionResponse.setPrimeFactor(divisor);
+      number = number / divisor;
+
+      // write the using call.write
+      call.write(primeNumberDecompositionResponse);
+    } else {
+      divisor++;
+      console.log("Divisor has increased to ", divisor);
+    }
+  }
+  call.end(); // all messages sent!
+}
+
 function main() {
   const server = new grpc.Server();
   server.addService(service.GreetServiceService, { greet });
-  server.addService(SumService.SumServiceService, { sum });
+  server.addService(SumService.SumServiceService, {
+    sum,
+    primeNumberDecomposition
+  });
   server.bind("127.0.0.1:50051", grpc.ServerCredentials.createInsecure());
   server.start();
   console.log("Server running on port 127.0.0.1:50051");
